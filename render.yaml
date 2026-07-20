@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: hermes
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: API_SERVER_ENABLED
+        value: "true"
+      - key: HERMES_API_KEY
+        generateValue: true
+
+  - type: web
+    name: webui
+    runtime: image
+    image:
+      url: ghcr.io/open-webui/open-webui:main
+    plan: free
+    envVars:
+      - key: OPENAI_API_BASE_URL
+        value: "https://hermes-web-chat-hermes.onrender.com/v1"
+      - key: OPENAI_API_KEY
+        value: "WIRD_MORGEN_ERSETZT"
